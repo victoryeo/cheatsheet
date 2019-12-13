@@ -1,3 +1,4 @@
+# install keras and numpy
 conda install -c conda-forge keras
 conda install numpy
 
@@ -10,8 +11,9 @@ conda config --set changeps1 False
 conda activate
 conda deactivate
 
+# install python spyder
 conda install -c anaconda spyder
 conda upgrade spyder
 
-#lis the environment
+# list the environment
 conda env list
