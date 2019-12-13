@@ -1,0 +1,93 @@
+# repo
+# in projects/master
+repo init -u git@git.devops.rfpros.com:CP_linux/wb_repo_manifest.git -b master
+repo sync -j 8
+repo forall -c git checkout master
+# in projects/lrd-7.0.0.x
+repo init -u git@git.devops.rfpros.com:CP_linux/wb_repo_manifest.git -b lrd-7.0.0.x
+repo sync -j 8
+repo forall -c git checkout lrd-7.0.0.x
+
+# setup mirroring
+repo init --reference /home/vic/disc2/repo.cache/laird_wb/cp_Linux/ -u git@git.devops.rfpros.com:cp_linux/wb_repo_manifest.git -b lrd-7.0.0.x
+
+cd <your_project_workspace>/wb
+# saving off all your changes and cleaning the workspace to get into sync.
+make cleanall 
+repo sync
+repo sync --force-sync
+
+repo list
+repo --trace sync
+
+# git
+# clean local changes, reset branch to be same as origin repo
+git fetch origin dev/master
+git reset --hard FETCH_HEAD
+git clean -nf
+
+git remote --verbose   
+git remote -v
+git branch -av
+
+git clone git@git.devops.lairdtech.com:Victor.Yeo/lrd_network_manager.git
+git remote add personal git@git.devops.lairdtech.com:Victor.Yeo/lrd_network_manager.git
+git checkout -b merge_1.20
+git remote add upstream https://gitlab.freedesktop.org/NetworkManager/NetworkManager
+git fetch upstream
+git diff 1.18.0 HEAD > 1.18_before_merge.diff
+git merge 1.20.0
+git mergetool
+git diff 1.20.0 HEAD > 1.20_after_merge.diff
+git push personal merge_1.20
+git checkout master
+git merge merge_1.20
+git push origin
+
+working directory
+|=>.git
+|  |=>objects           <= contains data for each commit
+|  |=>refs
+|     |=>heads
+|        |-master       <= file containing current commit of local master branch
+|     |=>remotes
+|        |=>origin
+|           |-master    <= file containing current commit of remote origin's master branch
+|-FETCH_HEAD            <= file updated by `git fetch`, contains info of what was fetched
+
+# to add all new files
+git add --all
+
+# to push to master branch
+git checkout master
+git fetch; git rebase origin/master
+git push
+
+# to push to another branch
+git checkout lrd-7.0.0.x
+git pull
+git cherry-pick <hash>
+gut push
+
+# to amend existing commit
+git rm <filename>
+git commit --amend
+
+# to re-do the commit
+git rebase -i HEAD~2
+git rebase --abort
+git reset <commit hash>
+git reset --hard HEAD~1
+
+# squash local commit
+git rebate -i HEAD~2
+git commit --amend
+
+# set variables in git
+    git config remote.origin.url git@git.devops.rfpros.com:cp_linux/wb-buildroot.git
+# unset
+    git config --unset remote.origin.url
+	
+# create patch 	
+    git format-patch HEAD~1
+
