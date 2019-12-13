@@ -1,0 +1,17 @@
+conda install -c conda-forge keras
+conda install numpy
+
+# do not automaticaly activate conda environment
+conda config --set auto_activate_base False
+
+# do not change the prompt
+conda config --set changeps1 False
+
+conda activate
+conda deactivate
+
+conda install -c anaconda spyder
+conda upgrade spyder
+
+#lis the environment
+conda env list
