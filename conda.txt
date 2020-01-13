@@ -17,3 +17,6 @@ conda upgrade spyder
 
 # list the environment
 conda env list
+
+# install pyTorch
+conda install -c pytorch pytorch
