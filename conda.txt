@@ -20,3 +20,6 @@ conda env list
 
 # install pyTorch
 conda install -c pytorch pytorch
+
+# install pandas_datareader
+conda install -c anaconda pandas-datareader
