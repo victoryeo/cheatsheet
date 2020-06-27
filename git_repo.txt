@@ -9,7 +9,7 @@ repo sync -j 8
 repo forall -c git checkout lrd-7.0.0.x
 
 # setup mirroring
-repo init --reference /home/vic/disc2/repo.cache/laird_wb/cp_Linux/ -u git@git.devops.rfpros.com:cp_linux/wb_repo_manifest.git -b lrd-7.0.0.x
+repo init --reference /home/disc2/repo.cache/wb/cp_Linux/ -u git@git.devops.rfpros.com:cp_linux/wb_repo_manifest.git -b lrd-7.0.0.x
 
 cd <your_project_workspace>/wb
 # saving off all your changes and cleaning the workspace to get into sync.
@@ -30,18 +30,20 @@ git remote --verbose
 git remote -v
 git branch -av
 
-git clone git@git.devops.lairdtech.com:Victor.Yeo/lrd_network_manager.git
-git remote add personal git@git.devops.lairdtech.com:Victor.Yeo/lrd_network_manager.git
-git checkout -b merge_1.20
+# git merge process
+git clone https://git.devops.com/cp_linux/local_network_manager.git
+git remote add personal git@git.devops.com:Victor.Yeo/network_manager.git
+git checkout -b merge_1
 git remote add upstream https://gitlab.freedesktop.org/NetworkManager/NetworkManager
 git fetch upstream
 git diff 1.18.0 HEAD > 1.18_before_merge.diff
 git merge 1.20.0
 git mergetool
+git commit -m "after merge"
 git diff 1.20.0 HEAD > 1.20_after_merge.diff
-git push personal merge_1.20
+git push personal merge_1
 git checkout master
-git merge merge_1.20
+git merge merge_1
 git push origin
 
 working directory
@@ -64,7 +66,7 @@ git fetch; git rebase origin/master
 git push
 
 # to push to another branch
-git checkout lrd-7.0.0.x
+git checkout ld-7.0.0.x
 git pull
 git cherry-pick <hash>
 gut push
@@ -80,7 +82,7 @@ git reset <commit hash>
 git reset --hard HEAD~1
 
 # squash local commit
-git rebate -i HEAD~2
+git rebase -i HEAD~2
 git commit --amend
 
 # set variables in git
@@ -91,3 +93,11 @@ git commit --amend
 # create patch 	
     git format-patch HEAD~1
 
+# git diff a file between two branches
+git diff v4.19.112..4.19.112_merge.v2 -- drivers/crypto/atmel-aes.c 
+
+# git show settings
+git config --list --show-origin
+git remote show origin
+git remote show upstream
+git ls-remote --tags upstream
