@@ -1,0 +1,13 @@
+[user]
+	name = Victor Yeo
+	email = victor.yeo@gmail.com
+[color]
+	ui = auto
+[reviewboard]
+	url = https://review.victor.com
+[remote "origin"]
+[alias]
+	co = checkout
+[core]
+	editor = vim
+	trustctime = false
