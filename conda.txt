@@ -24,6 +24,9 @@ conda install -c pytorch pytorch
 # install pandas_datareader
 conda install -c anaconda pandas-datareader
 
+# install django
+conda install -c anaconda django
+
 # add python2 to the conda environment
 conda create -n python python=2.7
 conda activate python
