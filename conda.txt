@@ -8,6 +8,7 @@ conda config --set auto_activate_base False
 # do not change the prompt
 conda config --set changeps1 False
 
+# activate virtual environment
 conda activate
 conda deactivate
 
@@ -17,6 +18,7 @@ conda upgrade spyder
 
 # list the environment
 conda env list
+conda info --envs
 
 # install pyTorch
 conda install -c pytorch pytorch
@@ -26,7 +28,6 @@ conda install -c anaconda pandas-datareader
 
 # install django
 conda install -c anaconda django
-
 condo install -c conda-forge djangorestframework
 
 # add python2 to the conda environment
