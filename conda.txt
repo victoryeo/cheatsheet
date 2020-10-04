@@ -30,7 +30,13 @@ conda install -c anaconda pandas-datareader
 conda install -c anaconda django
 condo install -c conda-forge djangorestframework
 
-# add python2 to the conda environment
-conda create -n python python=2.7
-conda activate python
+# add python2 to the virtual environment
+conda create -n mypython python=2.7
+conda activate mypython
 conda deactivate
+
+# install package to only virtual environment
+conda install -n mypython [package]
+
+# remove the virtual environment
+conda remove -n mypython -all
