@@ -1,0 +1,21 @@
+# see logs
+kubectl get pods -n gitlab-managed-apps
+kubectl logs install-helm -n gitlab-managed-apps
+
+# see events
+kubectl get events --sort-by=.metadata.creationTimestamp -n bc
+
+# create a pod
+kubectl -n bc create -f ./config-example.yaml
+
+# delete a pod
+kubectl -n bc delete -f ./config-example.yaml
+
+# show current cluster
+kubectl config current-context
+
+# select local cluster
+kubectl config use-context minikube
+
+# to connect to a pod command line
+kubectl exec nginx-f89759699-2gbwc  -it -- bash
