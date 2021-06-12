@@ -1,0 +1,39 @@
+curl -d '{"username":"xyz","password":"xyz"}'  -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/users/register
+
+curl -X GET http://127.0.0.1:5000/api/orders
+
+# search a string
+find . | xargs grep "searchstring"  2>/dev/null
+find . -exec grep searchstring {} \; 2>/dev/null
+
+# replace string 
+find ./ -type f -exec sed -i -e 's/old/new/g' {} \;
+
+# to view logs of single container
+docker logs -t -f <name-of-container>
+
+# to save logs to a file
+docker-compose logs -f -t >> myDockerCompose.log
+
+# on one console
+docker exec -it quorum-examples_node1_1 geth attach /qdata/dd/geth.ipc
+> eth.blockNumber
+# on another console
+docker exec -it quorum-examples_node2_1 geth attach /qdata/dd/geth.ipc
+> eth.blockNumber
+
+# docker run command
+docker run -v core.yaml:/go/src/github.com/hyperledger/fabric/peer/core.yaml -it hyperledger/fabric-peer:2.2 /bin/sh
+
+# check open tcp ports
+sudo netstat -tulpn
+
+# gcloud commands
+gcloud auth login
+gcloud auth application-default login
+gcloud auth  list
+gcloud config set account yeosiowvic@airasia.com
+gcloud projects list
+gcloud config set project airasia-datasciencesandbox-poc
+gcloud container clusters list
+gcloud container clusters get-credentials <cluster-name>
