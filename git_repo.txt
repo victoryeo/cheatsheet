@@ -1,4 +1,4 @@
-# repo
+### repo
 # in projects/master
 repo init -u git@git.devops.rfpros.com:CP_linux/wb_repo_manifest.git -b master
 repo sync -j 8
@@ -20,7 +20,7 @@ repo sync --force-sync
 repo list
 repo --trace sync
 
-# git
+### git
 # clean local changes, reset branch to be same as origin repo
 git fetch origin dev/master
 git reset --hard FETCH_HEAD
@@ -67,7 +67,7 @@ git push
 
 # to push to another branch
 git checkout ld-7.0.0.x
-git pull
+git pull --rebase
 git cherry-pick <hash>
 gut push
 
