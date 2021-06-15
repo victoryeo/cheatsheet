@@ -19,3 +19,10 @@ kubectl config use-context minikube
 
 # to connect to a pod command line
 kubectl exec nginx-f89759699-2gbwc  -it -- bash
+
+# live log
+kubectl -n bc logs peer0-ade-hlf-peer-797894965c-cvrxd --tail 1 --follow
+
+# scale deployment replicas
+kubectl scale deployment <name> --replicas=10
+
