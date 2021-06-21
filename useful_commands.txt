@@ -37,3 +37,11 @@ gcloud projects list
 gcloud config set project airasia-datasciencesandbox-poc
 gcloud container clusters list
 gcloud container clusters get-credentials <cluster-name>
+
+# query couchdb manually , run from bastion VM
+curl -X GET http://11.50.16.140:5984/_all_dbs
+curl -X GET http://11.50.16.140:5984/db_name/_all_docs
+curl -X GET http://11.50.16.140:5984/db_name/_all_docs?limit=2
+curl -H "Content-Type: application/json" -X POST http://11.50.16.140:5984/db_name/_find -d '{"selector": {"metadata.title": "live.let" }}'
+curl -H "Content-Type: application/json" -X POST http://11.50.16.140:5984/db_name/_find -d '{"selector": {"metadata.title": "live.let" },"limit":2 }'
+curl -H "Content-Type: application/json" -X POST http://11.50.16.140:5984/db_name/_find -d '{"selector": {"metadata.title": "live.let" },"limit":2 , "skip":2}'
