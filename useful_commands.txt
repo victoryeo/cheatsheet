@@ -48,3 +48,12 @@ curl -H "Content-Type: application/json" -X POST http://11.50.16.140:5984/db_nam
 
 # swagger generate
 swagger-codegen generate -i openapi.yaml -l typescript-angular
+
+# all open ports
+sudo netstat -tulpn
+
+# access postgres db
+# local instance 
+sudo -u postgres psql
+# remote tunneled instance
+sudo -u postgres psql -p <tunnel_port_number> -h localhost
