@@ -101,3 +101,6 @@ git config --list --show-origin
 git remote show origin
 git remote show upstream
 git ls-remote --tags upstream
+
+# in a branch, and pull new changes from the merged request
+git pull  origin merge-requests/9/head
