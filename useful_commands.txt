@@ -1,7 +1,3 @@
-curl -d '{"username":"xyz","password":"xyz"}'  -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/users/register
-
-curl -X GET http://127.0.0.1:5000/api/orders
-
 # search a string
 find . | xargs grep "searchstring"  2>/dev/null
 find . -exec grep searchstring {} \; 2>/dev/null
@@ -38,6 +34,10 @@ gcloud config set project airasia-datasciencesandbox-poc
 gcloud container clusters list
 gcloud container clusters get-credentials <cluster-name>
 
+# curl commands
+curl -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/users/register -d '{"username":"xyz","password":"xyz"}'
+curl -X GET http://127.0.0.1:5000/api/orders
+
 # query couchdb manually , run from bastion VM
 curl -X GET http://11.50.16.140:5984/_all_dbs
 curl -X GET http://11.50.16.140:5984/db_name/_all_docs
@@ -57,3 +57,10 @@ sudo netstat -tulpn
 sudo -u postgres psql
 # remote tunneled instance
 sudo -u postgres psql -p <tunnel_port_number> -h localhost
+
+# terraform
+terraform init -reconfigure
+terraform state pull > default.tfstate
+terraform state push  default.tfstate
+terraform plan -out=terra.plan
+terraform apply "terra.plan"
