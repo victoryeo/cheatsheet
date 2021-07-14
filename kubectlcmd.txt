@@ -11,6 +11,9 @@ kubectl -n bc create -f ./config-example.yaml
 # delete a pod
 kubectl -n bc delete -f ./config-example.yaml
 
+# show list of GKE contexts
+kubectl config get-contexts
+
 # show current cluster
 kubectl config current-context
 
