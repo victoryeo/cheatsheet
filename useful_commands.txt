@@ -33,6 +33,17 @@ gcloud projects list
 gcloud config set project airasia-datasciencesandbox-poc
 gcloud container clusters list
 gcloud container clusters get-credentials <cluster-name>
+gcloud auth activate-service-account  <account email> --key-file=<keyfile>.json
+gcloud services list
+gcloud auth application-default login
+# show current project
+gcloud config list core/project
+# delete vpc network
+gcloud compute networks delete <vpc_name>
+# list addresses
+gcloud  compute addresses list 
+# delete global addresses
+gcloud  compute addresses delete aerotrade-private-ip-address --global
 
 # curl commands
 curl -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/users/register -d '{"username":"xyz","password":"xyz"}'
@@ -64,3 +75,9 @@ terraform state pull > default.tfstate
 terraform state push  default.tfstate
 terraform plan -out=terra.plan
 terraform apply "terra.plan"
+# to see TF log
+export TF_LOG=debug
+# list state
+terraform state list
+# remove state using the name
+terraform state rm <name>
