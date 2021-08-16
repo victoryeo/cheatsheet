@@ -58,6 +58,8 @@ gcloud container clusters get-credentials <cluster-name> --zone asia-southeast1 
 gcloud auth activate-service-account  <account email> --key-file=<keyfile>.json
 # list the APIs
 gcloud services list
+
+# to overcome: "Error: Could not load the default credentials"
 gcloud auth application-default login
 # show current project
 gcloud config list core/project
@@ -67,6 +69,8 @@ gcloud compute networks delete <vpc_name>
 gcloud  compute addresses list 
 # delete global addresses
 gcloud  compute addresses delete aerotrade-private-ip-address --global
+# set zone
+gcloud config set compute/zone NAME
 
 # terraform
 terraform init -reconfigure
