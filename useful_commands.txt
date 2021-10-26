@@ -71,6 +71,8 @@ gcloud  compute addresses list
 gcloud  compute addresses delete aerotrade-private-ip-address --global
 # set zone
 gcloud config set compute/zone NAME
+# show the node pools
+gcloud container node-pools list --cluster=<cluster_name> --zone=<zone>
 
 # terraform
 terraform init -reconfigure
