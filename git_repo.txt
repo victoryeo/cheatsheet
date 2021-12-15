@@ -1,3 +1,6 @@
+# add git remote with access token
+git remote add origin https://<username>:<access_token>@github.com/<repo_name>.git
+
 ### repo
 # in projects/master
 repo init -u git@git.devops.rfpros.com:CP_linux/wb_repo_manifest.git -b master
