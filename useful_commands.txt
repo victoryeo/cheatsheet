@@ -22,6 +22,7 @@ swagger-codegen generate -i openapi.yaml -l typescript-angular
 
 # check open tcp ports
 sudo netstat -tulpn
+sudo ss -tulna
 
 # access postgres db
 # local instance 
@@ -86,3 +87,12 @@ export TF_LOG=debug
 terraform state list
 # remove state using the name
 terraform state rm <name>
+
+# vpn
+sudo ./openconnect --protocol=gp <ip_addr>:<port_no> -u user-name
+
+# specify local npm modules
+npm install --save ../my-local-repo
+
+# run ts files
+npx ts-node src/foo.ts
