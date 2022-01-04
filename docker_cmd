@@ -1,0 +1,24 @@
+# docker commands
+# build and tag the docker image
+docker build -t <tag_name> .
+# build with specific dockerfilename
+docker build -f <dockerfilename> -t <tag_name> .
+# list docker images
+docker image ls
+# run container instance from the image we created
+docker run -it -p <host_port>:<container_port>  <dockerhub_name>/<container_name>
+# run container in detached mode
+docker run -itd -p <host_port>:<container_port>  <dockerhub_name>/<container_name>
+# show all container id
+docker ps -a
+# enter the shell of the running container
+dcker exec -it <container_id> sh
+# tag the image
+docker tag <tag_name> <dockerhub_name>/<container_name>:latest
+# push to docker hub
+docker push <dockerhub_name>/<container_name>
+# show debug log
+docker logs --tail=50 <container_id>
+# go inside a exited container
+docker run --rm -it --entrypoint /bin/sh <dockerhub_name>/<container_name>
+
