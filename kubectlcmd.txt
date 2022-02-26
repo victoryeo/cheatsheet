@@ -1,5 +1,6 @@
 # deploy container to k8s pod
 kubectl create deployment <deployment_name> --image=<container> -n <namespace>
+kubectl create deployment bqdinator --image=asia.gcr.io/mycompany-blockchain-stg/bqdinator:latest -n myproject
 
 # delete a deployment
 kubectl delete deployment <deployment_name> -n <namespace>
