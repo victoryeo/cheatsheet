@@ -1,6 +1,13 @@
 # add git remote with access token
 git remote add origin https://<username>:<access_token>@github.com/<repo_name>.git
 
+# change git commit author name and email
+git filter-branch -f --env-filter "GIT_AUTHOR_NAME='new_name'; GIT_AUTHOR_EMAIL='new_email@gmail.com'; \
+GIT_COMMITTER_NAME='old_name'; GIT_COMMITTER_EMAIL='old_email@gmail.com';" HEAD
+
+# to Solve ‘fatal: refusing to merge unrelated histories’ when doing git pull
+git pull origin master --allow-unrelated-histories
+
 ### repo
 # in projects/master
 repo init -u git@git.devops.rfpros.com:CP_linux/wb_repo_manifest.git -b master
