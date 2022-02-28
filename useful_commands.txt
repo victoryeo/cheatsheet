@@ -30,21 +30,6 @@ sudo -u postgres psql
 # remote tunneled instance
 sudo -u postgres psql -p <tunnel_port_number> -h localhost
 
-# to view logs of single container
-docker logs -t -f <name-of-container>
-# to save logs to a file
-docker-compose logs -f -t >> myDockerCompose.log
-
-# on one console
-docker exec -it quorum-examples_node1_1 geth attach /qdata/dd/geth.ipc
-> eth.blockNumber
-# on another console
-docker exec -it quorum-examples_node2_1 geth attach /qdata/dd/geth.ipc
-> eth.blockNumber
-
-# docker run command
-docker run -v core.yaml:/go/src/github.com/hyperledger/fabric/peer/core.yaml -it hyperledger/fabric-peer:2.2 /bin/sh
-
 # gcloud commands
 gcloud auth login
 gcloud auth application-default login
@@ -90,6 +75,23 @@ export TF_LOG=debug
 terraform state list
 # remove state using the name
 terraform state rm <name>
+
+# helm
+# create a new chart in a new directory, only run once
+helm create ordermgt
+# check syntax of Chart.yaml file
+helm lint ./ordermgt/
+# install the container image to kubernetes cluster
+helm install <release_name> <folder_name>
+helm install ordermgt ./ordermgt/ --namespace test
+helm install ordermgt ./ordermgt/ --namespace test --set service.type=NodePort
+helm install ordermgt ./ordermgt/ --namespace test --values ordermgt/values.yaml
+helm ls
+helm ls --namespace test
+# helm delete is renamed to helm uninstall
+helm delete --namespace test ordermgt
+helm uninstall --namespace test ordermgt ./ordermgt
+helm -n test list -aq
 
 # vpn
 sudo ./openconnect --protocol=gp <ip_addr>:<port_no> -u user-name
