@@ -51,6 +51,9 @@ gcloud auth application-default login
 gcloud auth  list
 gcloud config set account yeosiowvic@airasia.com
 gcloud projects list
+# show current config and current project
+gcloud  config list
+
 gcloud config set project airasia-datasciencesandbox-poc
 gcloud container clusters list
 # connect to GKE cluster
