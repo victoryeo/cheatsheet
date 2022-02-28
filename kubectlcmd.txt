@@ -37,7 +37,7 @@ kubectl -n bc logs peer0-ade-hlf-peer-797894965c-cvrxd --tail 1 --follow
 kubectl scale deployment <name> --replicas=10
 
 # describe pod (to find pod's external ip address)
-kubectl -n aerotrade describe pod <podname>
+kubectl -n <namespace> describe pod <podname>
 
 # get namespace
 kubectl get namespace
