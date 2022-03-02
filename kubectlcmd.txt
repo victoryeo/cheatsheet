@@ -5,6 +5,11 @@ kubectl create deployment bqdinator --image=asia.gcr.io/mycompany-blockchain-stg
 # delete a deployment
 kubectl delete deployment <deployment_name> -n <namespace>
 
+# show list of ingress
+kubectl -n namespace get ingress
+# show specific ingress details
+kubectl -n namespace describe ingress <ingress_name>
+
 # see logs
 kubectl get pods -n gitlab-managed-apps
 kubectl logs install-helm -n gitlab-managed-apps
