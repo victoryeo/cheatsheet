@@ -1,0 +1,2 @@
+aws dynamodb scan --table-name BondTokens  --endpoint-url http://localhost:8000
+aws dynamodb list-tables --endpoint-url http://localhost:8000
