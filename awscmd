@@ -1,2 +1,5 @@
 aws dynamodb scan --table-name BondTokens  --endpoint-url http://localhost:8000
 aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+# include primary key and sort key when deleting item
+aws dynamodb delete-item --table-name BondTokens --key '{"companyID":{"N":"1"}, "companyName":{"S":"A"}}'  --endpoint-url http://localhost:8000
