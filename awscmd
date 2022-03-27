@@ -1,4 +1,4 @@
-# shpw table contents
+# show table contents
 aws dynamodb scan --table-name BondTokens  --endpoint-url http://localhost:8000
 # list all tables
 aws dynamodb list-tables --endpoint-url http://localhost:8000
@@ -8,3 +8,6 @@ aws dynamodb delete-item --table-name BondTokens --key '{"companyID":{"N":"1"}, 
 
 # query using primary key
 aws dynamodb query   --table-name BondTokens --key-condition-expression "companyID = :id" --expression-attribute-values  '{":id":{"N":"0"}}' --endpoint-url http://localhost:8000
+
+# return info about the table
+aws dynamodb describe-table --table-name BondTokens --endpoint-url http://localhost:8000
