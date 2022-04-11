@@ -50,3 +50,13 @@ kubectl get namespace
 # delete a pod
 kubectl delete pod  <pod_name>  -n <namespace>
 
+# get ingress
+kubectl  get ing -n <namespace>
+
+# describe ingress
+kubectl  describe ing <ingress_name>  -n <namespace>
+
+# get service
+kubectl get svc -n <namespace>
+kubectl get service -n <namespace>
+kubectl get service -n <namespace> -o wide
