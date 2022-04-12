@@ -75,6 +75,8 @@ export TF_LOG=debug
 terraform state list
 # remove state using the name
 terraform state rm <name>
+# if terraform init get timeout, add this as workaround
+export TF_REGISTRY_CLIENT_TIMEOUT=30
 
 # helm
 # create a new chart in a new directory, only run once
