@@ -11,3 +11,6 @@ aws dynamodb query   --table-name BondTokens --key-condition-expression "company
 
 # return info about the table
 aws dynamodb describe-table --table-name BondTokens --endpoint-url http://localhost:8000
+
+# set cluster to EKS cluster
+aws eks --region <region_name> update-kubeconfig --name <cluster_name>
