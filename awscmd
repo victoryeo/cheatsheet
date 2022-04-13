@@ -14,3 +14,9 @@ aws dynamodb describe-table --table-name BondTokens --endpoint-url http://localh
 
 # set cluster to EKS cluster
 aws eks --region <region_name> update-kubeconfig --name <cluster_name>
+
+# View your cluster's OIDC provider URL
+aws eks describe-cluster --name besu-cluster-tf --query "cluster.identity.oidc.issuer" --output text
+
+# List the IAM OIDC providers in your account
+aws iam list-open-id-connect-providers
