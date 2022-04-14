@@ -95,6 +95,10 @@ helm delete --namespace test ordermgt
 helm uninstall --namespace test ordermgt ./ordermgt
 helm -n test list -aq
 
+# one  command to delete all helm resources
+helm -n <namespace> list --short | xargs -L1 helm uninstall -n <namespace>
+
+
 # vpn
 sudo ./openconnect --protocol=gp <ip_addr>:<port_no> -u user-name
 
