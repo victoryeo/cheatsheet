@@ -12,6 +12,17 @@ aws dynamodb query   --table-name BondTokens --key-condition-expression "company
 # return info about the table
 aws dynamodb describe-table --table-name BondTokens --endpoint-url http://localhost:8000
 
+# get mfa session token
+aws sts get-session-token --serial-number arn:aws:iam::<account_id>:mfa/<name>  --token-code=<code>
+# get caller identity
+aws sts get-caller-identity
+
+# list mfa virtual devices
+aws iam list-virtual-mfa-devices
+
+# see all ec2 instances
+aws ec2 describe-instances
+
 # set cluster to EKS cluster
 aws eks --region <region_name> update-kubeconfig --name <cluster_name>
 
