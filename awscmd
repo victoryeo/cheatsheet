@@ -24,8 +24,24 @@ aws iam list-open-id-connect-providers
 # Create an IAM OIDC identity provider for your cluster
 eksctl utils associate-iam-oidc-provider --cluster my-cluster --approve
 
-# Create an IAM role for a service account
+# Alternate way: Create an IAM role for a service account
 eksctl create iamserviceaccount  --name ebs-csi-controller-sa     --namespace kube-system     --cluster besu-cluster-tf     --role-name "ebs-iam-role-name"     --attach-policy-arn arn:aws:iam::281215527701:policy/ebs-csi-driver     --approve --override-existing-serviceaccounts
+
+# create an IAM policy
+aws iam create-policy --policy-name AmazonEKS_EBS_CSI_Driver_Policy --policy-document file://example-iam-policy.json
+
+# create an IAM role
+aws iam create-role \
+  --role-name AmazonEKS_EBS_CSI_DriverRole \
+  --assume-role-policy-document file://"trust-policy.json"
+
+# attach IAM policy to the IAM role
+aws iam attach-role-policy \
+--policy-arn arn:aws:iam::281215527701:policy/AmazonEKS_EBS_CSI_Driver_Policy \
+--role-name AmazonEKS_EBS_CSI_DriverRole
+
+# deploy AWS EBS CSI driver
+kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=master"
 
 # annotate service account with IAM role
 kubectl annotate serviceaccount -n kube-system ebs-csi-controller-sa eks.amazonaws.com/role-arn=arn:aws:iam::281215527701:role/AmazonEKS_EBS_CSI_DriverRole --overwrite
