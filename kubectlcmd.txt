@@ -63,3 +63,7 @@ kubectl delete pod  <pod_name>  -n <namespace>
 kubectl get svc -n <namespace>
 kubectl get service -n <namespace>
 kubectl get service -n <namespace> -o wide
+
+# get service of current context
+kubectl --context CURRENT_CONTEXT get svc
+kubectl --context arn:aws:eks:us-west-2:151215527701:cluster/sube-cluster-tf get svc
