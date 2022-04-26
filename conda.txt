@@ -1,3 +1,7 @@
+# list conda environments
+conda info --envs
+conda env list
+
 # install keras and numpy
 conda install -c conda-forge keras
 conda install numpy
