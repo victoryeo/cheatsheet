@@ -43,4 +43,5 @@ conda deactivate
 conda install -n mypython [package]
 
 # remove the virtual environment
+conda env remove -n mypython
 conda remove -n mypython -all
