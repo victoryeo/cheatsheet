@@ -39,6 +39,9 @@ kubectl config current-context
 # select local cluster
 kubectl config use-context minikube
 
+# connect with your aws cluster
+aws eks --region us-east-1 update-kubeconfig --name my-test-cluster
+
 # to connect to a pod command line
 kubectl exec nginx-f89759699-2gbwc  -it -- bash
 # connect to container in pod
