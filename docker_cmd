@@ -38,3 +38,9 @@ docker exec -it quorum-examples_node2_1 geth attach /qdata/dd/geth.ipc
 
 # docker run command
 docker run -v core.yaml:/go/src/github.com/hyperledger/fabric/peer/core.yaml -it hyperledger/fabric-peer:2.2 /bin/sh
+
+# attach to docker container
+docker attach <docker_container_name>
+
+# detach from docker container
+pkill -9 -f 'docker.*attach'
