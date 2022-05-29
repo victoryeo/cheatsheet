@@ -1,0 +1,27 @@
+To fix solana cargo build error 
+
+# error message below
+thread ‘main’ panicked at 'Unable to find libudev: "pkg-config" "--libs" "--cflags" "libudev" did not exit successfully: exit status: 1
+
+# to fix the build error, follow the steps:
+
+# to install libudev-dev
+sudo apt install libudev-dev
+
+# to locate the folder containing udev 
+locate udev | grep '\.pc'
+
+# to see where pkg-config searches
+pkg-config --variable pc_path pkg-config
+
+# to check PKG_CONFIG_PATH env var
+echo ${PKG_CONFIG_PATH}
+
+# to set PKG_CONFIG_PATH env var
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig/
+
+# to see all pkg-config search path
+echo $(pkg-config --variable pc_path pkg-config)${PKG_CONFIG_PATH:+:}${PKG_CONFIG_PATH}
+
+# to build solana
+cargo build 
