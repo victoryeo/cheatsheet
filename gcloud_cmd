@@ -1,0 +1,32 @@
+# gcloud commands
+gcloud auth login
+gcloud auth application-default login
+gcloud auth  list
+gcloud config set account yeosiowvic@airasia.com
+gcloud projects list
+# show current config and current project
+gcloud  config list
+
+gcloud config set project airasia-datasciencesandbox-poc
+gcloud container clusters list
+# connect to GKE cluster
+gcloud container clusters get-credentials <cluster-name> --zone asia-southeast1 --project <proj_name>
+# activate service account
+gcloud auth activate-service-account  <account email> --key-file=<keyfile>.json
+# list the APIs
+gcloud services list
+
+# to overcome: "Error: Could not load the default credentials"
+gcloud auth application-default login
+# show current project
+gcloud config list core/project
+# delete vpc network
+gcloud compute networks delete <vpc_name>
+# list addresses
+gcloud  compute addresses list 
+# delete global addresses
+gcloud  compute addresses delete aerotrade-private-ip-address --global
+# set zone
+gcloud config set compute/zone NAME
+# show the node pools
+gcloud container node-pools list --cluster=<cluster_name> --zone=<zone>
