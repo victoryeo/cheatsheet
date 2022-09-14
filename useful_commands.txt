@@ -85,3 +85,9 @@ lsof -n -i4TCP:8081
 
 # check process associated with open ports
 sudo netstat -apn -A inet | grep :8081
+
+# unpin files in ipfs daemon
+ipfs pin ls -q --type recursive  | xargs ipfs pin rm
+
+# remove (garbage collect)  files in ipfs daemon 
+ipfs repo gc
