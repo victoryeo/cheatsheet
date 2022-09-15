@@ -5,6 +5,9 @@ find . -exec grep searchstring {} \; 2>/dev/null
 # replace string 
 find ./ -type f -exec sed -i -e 's/old/new/g' {} \;
 
+# change file extension recursively
+find ./ -depth -name "*.js" -exec sh -c 'mv "$1" "${1%.js}.ts"' _ {} \;
+
 # curl commands
 curl -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/users/register -d '{"username":"xyz","password":"xyz"}'
 curl -X GET http://127.0.0.1:5000/api/orders
@@ -40,26 +43,6 @@ terraform state list
 terraform state rm <name>
 # if terraform init get timeout, add this as workaround
 export TF_REGISTRY_CLIENT_TIMEOUT=30
-
-# helm
-# create a new chart in a new directory, only run once
-helm create ordermgt
-# check syntax of Chart.yaml file
-helm lint ./ordermgt/
-# install the container image to kubernetes cluster
-helm install <release_name> <folder_name>
-helm install ordermgt ./ordermgt/ --namespace test
-helm install ordermgt ./ordermgt/ --namespace test --set service.type=NodePort
-helm install ordermgt ./ordermgt/ --namespace test --values ordermgt/values.yaml
-helm ls
-helm ls --namespace test
-# helm delete is renamed to helm uninstall
-helm delete --namespace test ordermgt
-helm uninstall --namespace test ordermgt ./ordermgt
-helm -n test list -aq
-
-# one  command to delete all helm resources
-helm -n <namespace> list --short | xargs -L1 helm uninstall -n <namespace>
 
 # vpn
 sudo ./openconnect --protocol=gp <ip_addr>:<port_no> -u user-name
