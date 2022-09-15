@@ -70,3 +70,23 @@ kubectl get service -n <namespace> -o wide
 # get service of current context
 kubectl --context CURRENT_CONTEXT get svc
 kubectl --context arn:aws:eks:us-west-2:151215527701:cluster/sube-cluster-tf get svc
+
+# helm
+# create a new chart in a new directory, only run once
+helm create ordermgt
+# check syntax of Chart.yaml file
+helm lint ./ordermgt/
+# install the container image to kubernetes cluster
+helm install <release_name> <folder_name>
+helm install ordermgt ./ordermgt/ --namespace test
+helm install ordermgt ./ordermgt/ --namespace test --set service.type=NodePort
+helm install ordermgt ./ordermgt/ --namespace test --values ordermgt/values.yaml
+helm ls
+helm ls --namespace test
+# helm delete is renamed to helm uninstall
+helm delete --namespace test ordermgt
+helm uninstall --namespace test ordermgt ./ordermgt
+helm -n test list -aq
+
+# one  command to delete all helm resources
+helm -n <namespace> list --short | xargs -L1 helm uninstall -n <namespace>
