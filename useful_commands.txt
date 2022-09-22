@@ -74,3 +74,7 @@ ipfs pin ls -q --type recursive  | xargs ipfs pin rm
 
 # remove (garbage collect)  files in ipfs daemon 
 ipfs repo gc
+
+# On react native, to access your local development server, do port mapping
+# the port 4004 is tcp port of local development server
+adb reverse tcp:4004 tcp:4004
