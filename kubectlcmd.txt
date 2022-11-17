@@ -73,6 +73,8 @@ kubectl --context arn:aws:eks:us-west-2:151215527701:cluster/sube-cluster-tf get
 
 # open aws-auth configmap for editing
 kubectl edit -n kube-system configmap/aws-auth
+# reading aws-auth configmap
+kubectl describe -n kube-system configmap/aws-auth
 
 # helm
 # create a new chart in a new directory, only run once
