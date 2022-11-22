@@ -46,6 +46,8 @@ aws eks --region us-east-1 update-kubeconfig --name my-test-cluster
 kubectl exec nginx-f89759699-2gbwc  -it -- bash
 # connect to container in pod
 kubectl -n <namespace> exec <pod> --container <container_name> -it -- bash
+# connect to postgres container
+kubectl exec -it <pod> -c postgresql -- psql -U postgres -p 5432
 
 # live log
 kubectl -n bc logs peer0-ade-hlf-peer-797894965c-cvrxd --tail 1 --follow
