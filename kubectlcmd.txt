@@ -73,6 +73,9 @@ kubectl get service -n <namespace> -o wide
 kubectl --context CURRENT_CONTEXT get svc
 kubectl --context arn:aws:eks:us-west-2:151215527701:cluster/sube-cluster-tf get svc
 
+# copy file to a container in a specific pod
+kubectl cp /home/Downloads/tokendata.csv kafka-proxy-85557c4ddb-k9zhp:/tmp/ -c postgresql
+
 # open aws-auth configmap for editing
 kubectl edit -n kube-system configmap/aws-auth
 # reading aws-auth configmap
