@@ -78,3 +78,6 @@ ipfs repo gc
 # On react native, to access your local development server, do port mapping
 # the port 4004 is tcp port of local development server
 adb reverse tcp:4004 tcp:4004
+
+# jmeter load test
+./jmeter -n -t ../token-backend-eks.jmx -l loadtest18.csv -e -o ./output18
