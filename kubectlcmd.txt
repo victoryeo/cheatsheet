@@ -1,3 +1,6 @@
+# get endpoint, to observe ip addresses assigned to pods
+kubectl get ep
+
 # deploy container to k8s pod
 kubectl create deployment <deployment_name> --image=<container> -n <namespace>
 kubectl create deployment bqdinator --image=asia.gcr.io/mycompany-blockchain-stg/bqdinator:latest -n myproject
