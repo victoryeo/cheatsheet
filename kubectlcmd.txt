@@ -1,6 +1,9 @@
 # get endpoint, to observe ip addresses assigned to pods
 kubectl get ep
 
+# show pod labels
+kubectl get pod --show-labels=true
+
 # deploy container to k8s pod
 kubectl create deployment <deployment_name> --image=<container> -n <namespace>
 kubectl create deployment bqdinator --image=asia.gcr.io/mycompany-blockchain-stg/bqdinator:latest -n myproject
@@ -83,6 +86,9 @@ kubectl cp /home/Downloads/tokendata.csv kafka-proxy-85557c4ddb-k9zhp:/tmp/ -c p
 kubectl edit -n kube-system configmap/aws-auth
 # reading aws-auth configmap
 kubectl describe -n kube-system configmap/aws-auth
+
+# enter redis pod and run redis-cli tool
+kubectl exec -it redis-pod -- redis-cli
 
 # helm
 # create a new chart in a new directory, only run once
