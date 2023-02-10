@@ -39,6 +39,9 @@ kubectl -n bc delete -f ./config-example.yaml
 # show list of GKE contexts
 kubectl config get-contexts
 
+# use the context of cluster
+kubectl config use-context <CLUSTER_NAME>
+
 # show current cluster
 kubectl config current-context
 
