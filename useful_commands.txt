@@ -81,3 +81,6 @@ adb reverse tcp:4004 tcp:4004
 
 # jmeter load test
 ./jmeter -n -t ../token-backend-eks.jmx -l loadtest18.csv -e -o ./output18
+
+# fix: fatal could not read Username for 'https://gitlab.com
+go env -w GOPRIVATE=gitlab.com/<pathname>*
