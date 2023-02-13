@@ -117,3 +117,11 @@ helm -n <namespace> list --short | xargs -L1 helm uninstall -n <namespace>
 # install helm chart with custom values
 helm install my-release my-repo/postgresql --set "architecture=replication,replication.enabled=true,replication.slaveReplicas=2,postgresqlUsername=admin,postgresqlPassword=password"
 
+# deploy a nginx pod
+kubectl create deployment nginxapp --image=nginx:1.14.2
+
+# to untaint nodes
+kubectl taint nodes --all eks.amazonaws.com/compute-type=fargate:NoSchedule-
+
+# to check CSI driver version
+kubectl explain CSIDriver
