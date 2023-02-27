@@ -125,3 +125,9 @@ kubectl taint nodes --all eks.amazonaws.com/compute-type=fargate:NoSchedule-
 
 # to check CSI driver version
 kubectl explain CSIDriver
+
+# krew plugin manager, list all plugins installed
+kubectl krew list
+
+# if resource-capacity plugin is installed, we can run the command
+kubectl resource-capacity
