@@ -114,3 +114,7 @@ git ls-remote --tags upstream
 
 # in a branch, and pull new changes from the merged request
 git pull  origin merge-requests/9/head
+
+# delete a remote branch 
+git push https://victoryeo:<token>@github.com/victoryeo/<repo>.git -d <branch_name>
+
