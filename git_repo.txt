@@ -118,3 +118,6 @@ git pull  origin merge-requests/9/head
 # delete a remote branch 
 git push https://victoryeo:<token>@github.com/victoryeo/<repo>.git -d <branch_name>
 
+# rename branch name
+git branch -m old-branch new-branch
+
