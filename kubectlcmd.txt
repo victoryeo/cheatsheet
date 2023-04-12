@@ -129,5 +129,9 @@ kubectl explain CSIDriver
 # krew plugin manager, list all plugins installed
 kubectl krew list
 
+# install ctx plugin via krew
+kubectl krew install ctx
+kubectl ctx
+
 # if resource-capacity plugin is installed, we can run the command
 kubectl resource-capacity
