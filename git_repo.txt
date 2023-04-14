@@ -121,3 +121,6 @@ git push https://victoryeo:<token>@github.com/victoryeo/<repo>.git -d <branch_na
 # rename branch name
 git branch -m old-branch new-branch
 
+# if git does not recognise file has been changed, reset the cache
+git rm --cached path/to/file
+git reset path/to/file 
