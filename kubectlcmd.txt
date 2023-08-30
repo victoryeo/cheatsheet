@@ -1,3 +1,6 @@
+# switch namespace
+kubectl config set-context --current --namespace=newns
+
 # get endpoint, to observe ip addresses assigned to pods
 kubectl get ep
 
