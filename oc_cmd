@@ -1,0 +1,11 @@
+# check security context constrants (scc)
+oc describe project <namespace>  | grep scc
+
+# edit the uid gid of security context constrants
+oc edit namespace <namespace>
+
+# get restricted scc in yaml format
+oc get scc restricted -o yaml
+
+# get scc of pod
+oc get pod <podname> -o yaml | grep scc
