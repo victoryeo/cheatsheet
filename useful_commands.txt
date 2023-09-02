@@ -56,6 +56,12 @@ npx ts-node src/foo.ts
 # make new group visible for user
 exec sudo su -l $USER
 
+# show first 30 lines
+head -30 package.json
+
+# set default editor
+update-alternatives --config editor
+
 # show all open tcp ports
 sudo netstat -tulpn
 sudo ss -tulna
