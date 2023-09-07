@@ -1,6 +1,9 @@
 # switch namespace
 kubectl config set-context --current --namespace=newns
 
+# check for ingress controller conflict (if got more than one ingress controller)
+kubectl get svc -A | grep LoadBalancer
+
 # get endpoint, to observe ip addresses assigned to pods
 kubectl get ep
 
