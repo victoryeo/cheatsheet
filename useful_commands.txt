@@ -1,3 +1,6 @@
+# search a string , exclude multiple directories
+grep -r __typename --exclude-dir={.next,node_modules} > log
+
 # search a string
 find . | xargs grep "searchstring"  2>/dev/null
 find . -exec grep searchstring {} \; 2>/dev/null
