@@ -1,0 +1,21 @@
+### connect to aks cluster
+az aks get-credentials --resource-group <groupname> --name <clustername>
+
+### show fqdn
+az aks show -n <clustername> -g <groupname> -o json | grep fqdn
+
+### show DNS zone name
+az aks show -g <groupname> -n <clustername> --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o table
+
+### enable http routing addon
+az aks enable-addons --resource-group <groupname> --name <clustername> --addons http_application_routing
+
+### check nodepool status
+az aks nodepool list --resource-group <groupname> --cluster-name <clustername>
+
+### add nodepool to cluster
+az aks nodepool add \
+    --resource-group <groupname> \
+    --cluster-name <clustername> \
+    --name mynodepool \
+    --node-count 3
