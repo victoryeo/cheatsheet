@@ -50,7 +50,7 @@ kubectl -n bc create -f ./config-example.yaml
 # delete a pod
 kubectl -n bc delete -f ./config-example.yaml
 
-# show list of GKE contexts
+# show list of k8s contexts
 kubectl config get-contexts
 
 # use the context of cluster
@@ -59,8 +59,8 @@ kubectl config use-context <CLUSTER_NAME>
 # show current cluster
 kubectl config current-context
 
-# select local cluster
-kubectl config use-context minikube
+# delete cluster from ~/.kube/config
+kubectl config delete-context <CLUSTER_NAME>
 
 # delete cluster/context/user entries
 kubectl config unset users.gke_project_zone_name
