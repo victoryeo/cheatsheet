@@ -1,14 +1,14 @@
-# switch namespace
-kubectl config set-context --current --namespace=newns
+# find pod with selector value of example
+kubectl get -l app=example pod
+
+# show pod labels
+kubectl get pod --show-labels=true
 
 # check for ingress controller conflict (if got more than one ingress controller)
 kubectl get svc -A | grep LoadBalancer
 
 # get endpoint, to observe ip addresses assigned to pods
 kubectl get ep
-
-# show pod labels
-kubectl get pod --show-labels=true
 
 # get keda scaled object from all namespaces
 kubectl get scaledobject -A
@@ -55,6 +55,9 @@ kubectl config get-contexts
 
 # use the context of cluster
 kubectl config use-context <CLUSTER_NAME>
+
+# switch namespace
+kubectl config set-context --current --namespace=newns
 
 # show current cluster
 kubectl config current-context
