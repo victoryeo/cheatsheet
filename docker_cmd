@@ -1,4 +1,7 @@
 # docker commands
+# docker context
+docker context ls
+
 # build and tag the docker image
 docker build -t <tag_name> .
 # build with specific dockerfilename
