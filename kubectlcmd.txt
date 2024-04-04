@@ -122,29 +122,6 @@ kubectl describe -n kube-system configmap/aws-auth
 # enter redis pod and run redis-cli tool
 kubectl exec -it redis-pod -- redis-cli
 
-# helm
-# create a new chart in a new directory, only run once
-helm create ordermgt
-# check syntax of Chart.yaml file
-helm lint ./ordermgt/
-# install the container image to kubernetes cluster
-helm install <release_name> <folder_name>
-helm install ordermgt ./ordermgt/ --namespace test
-helm install ordermgt ./ordermgt/ --namespace test --set service.type=NodePort
-helm install ordermgt ./ordermgt/ --namespace test --values ordermgt/values.yaml
-helm ls
-helm ls --namespace test
-# helm delete is renamed to helm uninstall
-helm delete --namespace test ordermgt
-helm uninstall --namespace test ordermgt ./ordermgt
-helm -n test list -aq
-
-# one  command to delete all helm resources
-helm -n <namespace> list --short | xargs -L1 helm uninstall -n <namespace>
-
-# install helm chart with custom values
-helm install my-release my-repo/postgresql --set "architecture=replication,replication.enabled=true,replication.slaveReplicas=2,postgresqlUsername=admin,postgresqlPassword=password"
-
 # deploy a nginx pod
 kubectl create deployment nginxapp --image=nginx:1.14.2
 
