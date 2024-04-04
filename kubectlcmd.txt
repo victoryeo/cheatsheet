@@ -1,3 +1,6 @@
+# create a pod with nginx image and export port 80
+kubectl run pod1 --image=nginx:2.3.5 --port=80  --dry-run=client -o yaml
+
 # find pod with selector value of example
 kubectl get -l app=example pod
 
