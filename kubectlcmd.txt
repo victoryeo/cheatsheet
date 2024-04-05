@@ -1,6 +1,3 @@
-# create a generic secret with literal value
-kubectl create secret generic my-secret --from-literal=db-password=speed
-
 # create a pod with nginx image and export port 80
 kubectl run pod1 --image=nginx:2.3.5 --port=80  --dry-run=client -o yaml
 
@@ -19,26 +16,34 @@ kubectl get svc -A | grep LoadBalancer
 # get endpoint, to observe ip addresses assigned to pods
 kubectl get ep
 
+# show list of ingress
+kubectl get ing -n <namespace>
+
+# see events
+kubectl get events --sort-by=.metadata.creationTimestamp -n <namespace>
+
 # get keda scaled object from all namespaces
 kubectl get scaledobject -A
+
+# create a generic secret with literal value
+kubectl create secret generic my-secret --from-literal=db-password=speed
 
 # deploy container to k8s pod
 kubectl create deployment <deployment_name> --image=<container> -n <namespace>
 kubectl create deployment bqdinator --image=asia.gcr.io/mycompany-blockchain-stg/bqdinator:latest -n myproject
+# deploy a nginx pod
+kubectl create deployment nginxapp --image=nginx:1.14.2
 
 # describe deployment
 kubectl describe deployment <deployment_name> -n <namespace>
-# delete a deployment
-kubectl delete deployment <deployment_name> -n <namespace>
-
-# show list of ingress
-kubectl -n <namespace> get ingress
-kubectl -n <namespace> get ing 
-# show specific ingress details
-kubectl -n <namespace> describe ingress <ingress_name>
-kubectl -n <namespace> describe ing <ingress_name>  
+# describe secret
+kubectl describe secret <secret_name>
 # describe ingress routes
-kubectl -n <namespace> describe ingress besu-ingress-routes
+kubectl describe ingress <ingress_name> -n <namespace>
+# describe pod (to find pod's external ip address)
+kubectl describe pod <podname> -n <namespace> 
+# show specific ingress details
+kubectl describe ing <ingress_name> -n <namespace> 
 
 # apply k8s ingress yaml file
 kubectl apply -f <k8s_yaml>.yml
@@ -50,14 +55,17 @@ kubectl logs install-helm -n gitlab-managed-apps
 # access log of previously crashed pod
 kubectl logs --tail=10 <POD-NAME> -p
 
-# see events
-kubectl get events --sort-by=.metadata.creationTimestamp -n bc
-
 # create a pod
-kubectl -n bc create -f ./config-example.yaml
+kubectl create -f ./config-example.yaml -n <namespace>
 
 # delete a pod
-kubectl -n bc delete -f ./config-example.yaml
+kubectl delete -f ./config-example.yaml -n <namespace>
+
+# delete a pod
+kubectl delete pod  <pod_name>  -n <namespace>
+
+# delete a deployment
+kubectl delete deployment <deployment_name> -n <namespace>
 
 # show list of k8s contexts
 kubectl config get-contexts
@@ -88,6 +96,10 @@ kubectl exec nginx-f89759699-2gbwc  -it -- bash
 kubectl -n <namespace> exec <pod> --container <container_name> -it -- bash
 # connect to postgres container
 kubectl exec -it <pod> -c postgresql -- psql -U postgres -p 5432
+# enter redis pod and run redis-cli tool
+kubectl exec -it redis-pod -- redis-cli
+# get env variable
+kubectl exec -it <pod_name> -- env
 
 # live log
 kubectl -n bc logs peer0-ade-hlf-peer-797894965c-cvrxd --tail 1 --follow
@@ -96,15 +108,8 @@ kubectl -n bc logs peer0-ade-hlf-peer-797894965c-cvrxd --tail 1 -f
 # scale deployment replicas
 kubectl scale deployment <name> --replicas=10
 
-# describe pod (to find pod's external ip address)
-kubectl -n <namespace> describe pod <podname>
-
 # get namespace
 kubectl get namespace
-
-# delete a pod
-kubectl delete pod  <pod_name>  -n <namespace>
-
 # get service
 kubectl get svc -n <namespace>
 kubectl get service -n <namespace>
@@ -121,12 +126,6 @@ kubectl cp /home/Downloads/tokendata.csv kafka-proxy-85557c4ddb-k9zhp:/tmp/ -c p
 kubectl edit -n kube-system configmap/aws-auth
 # reading aws-auth configmap
 kubectl describe -n kube-system configmap/aws-auth
-
-# enter redis pod and run redis-cli tool
-kubectl exec -it redis-pod -- redis-cli
-
-# deploy a nginx pod
-kubectl create deployment nginxapp --image=nginx:1.14.2
 
 # to untaint nodes
 kubectl taint nodes --all eks.amazonaws.com/compute-type=fargate:NoSchedule-
