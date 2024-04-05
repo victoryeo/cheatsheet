@@ -1,3 +1,6 @@
+# create a generic secret with literal value
+kubectl create secret generic my-secret --from-literal=db-password=speed
+
 # create a pod with nginx image and export port 80
 kubectl run pod1 --image=nginx:2.3.5 --port=80  --dry-run=client -o yaml
 
