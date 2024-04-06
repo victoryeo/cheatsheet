@@ -1,3 +1,6 @@
+# kubectl command auto completion 
+source <(kubectl completion bash)
+
 # update nginx image to latest version
 kubectl set image deployment/<deploy_name> nginx=nginx:latest
 
