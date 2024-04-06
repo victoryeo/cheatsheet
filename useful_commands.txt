@@ -1,5 +1,7 @@
 # search a string , exclude multiple directories
 grep -r __typename --exclude-dir={.next,node_modules} > log
+# print prev and next 5 lines of the matched string IP
+grep -C 5 IP
 
 # search a string
 find . | xargs grep "searchstring"  2>/dev/null
