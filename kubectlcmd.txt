@@ -1,6 +1,12 @@
 # kubectl command auto completion 
 source <(kubectl completion bash)
 
+# watch the cronjob as they are being scheduled
+kubectl get cronjob --watch
+
+# show cronjob successfulJobsHistoryLimit
+kubectl get cronjobs <job_name> -o yaml
+
 # update nginx image to latest version
 kubectl set image deployment/<deploy_name> nginx=nginx:latest
 
