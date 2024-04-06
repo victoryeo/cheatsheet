@@ -21,6 +21,8 @@ kubectl run pod1 --image=nginx:2.3.5 --port=80  --dry-run=client -o yaml
 
 # run a temporary pod
 kubectl run busybox --image=busybox --rm -it -- /bin/sh
+# run a temp pod and wget against clusterIP address of the service
+kubectl run tmppod --image=busybox --restart=Never -it --rm -- wget -O- 10.66.220.246
 
 # find pod with selector value of example
 kubectl get pod -l app=example
@@ -57,8 +59,12 @@ kubectl create deployment <deployment_name> --image=<container> -n <namespace>
 kubectl create deployment bqdinator --image=asia.gcr.io/mycompany-blockchain-stg/bqdinator:latest -n myproject
 # deploy a nginx pod
 kubectl create deployment nginxapp --image=nginx:1.14.2
+# deploy and expose port
+kubectl create deploy myapp --image=nginx --port=80 --replicas=1 
 # create quota
 kubectl create quota my-quota --hard=cpu=1,memory=500M,pods=2 --dry-run=client -o yaml -n rq-demo 
+# create service
+kubectl create service clusterip myapp --tcp=80:80
 
 # describe deployment
 kubectl describe deployment <deployment_name> -n <namespace>
