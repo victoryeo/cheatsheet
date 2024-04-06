@@ -5,10 +5,16 @@ kubectl run pod1 --image=nginx:2.3.5 --port=80  --dry-run=client -o yaml
 kubectl run busybox --image=busybox --rm -it -- /bin/sh
 
 # find pod with selector value of example
-kubectl get -l app=example pod
+kubectl get pod -l app=example
 
 # show pod labels
 kubectl get pod --show-labels=true
+
+# show labels belonging to web and batch in prod
+kubectl get pod -l 'env in (prod), tier in (web,batch)'
+
+# unlabel a pod
+k label pod pod9 tier-
 
 # check for ingress controller conflict (if got more than one ingress controller)
 kubectl get svc -A | grep LoadBalancer
