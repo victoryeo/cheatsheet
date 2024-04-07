@@ -14,7 +14,9 @@ helm install ordermgt ./ordermgt/ --namespace test --values ordermgt/values.yaml
 helm install q20 bitnami/apache --set replicaCount=2
 
 helm ls
-helm ls --namespace test
+helm -n mercury ls 
+# show pending upgrade status
+helm -n mercury ls -a 
 
 # helm delete is renamed to helm uninstall
 helm delete --namespace test ordermgt
