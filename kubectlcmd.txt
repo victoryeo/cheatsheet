@@ -79,6 +79,8 @@ kubectl describe secret <secret_name>
 kubectl describe ingress <ingress_name> -n <namespace>
 # describe pod (to find pod's external ip address)
 kubectl describe pod <podname> -n <namespace> 
+# get pod status
+kubectl describe pod <podname> | grep -i status
 # show specific ingress details
 kubectl describe ing <ingress_name> -n <namespace> 
 
