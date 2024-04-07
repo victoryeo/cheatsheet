@@ -1,5 +1,6 @@
 # kubectl command auto completion 
 source <(kubectl completion bash)
+complete -F __start_kubectl k
 
 # watch the cronjob as they are being scheduled
 kubectl get cronjob --watch
