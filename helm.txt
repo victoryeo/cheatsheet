@@ -30,6 +30,8 @@ helm install my-release my-repo/postgresql --set "architecture=replication,repli
 # search a repo
 helm search repo nginx --versions
 
+helm upgrade my-release bitnami/nginx-ingress-controller --version 9.4.0
+
 # add repo
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
