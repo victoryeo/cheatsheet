@@ -18,7 +18,8 @@ kubectl rollout history deploy <deploy_name> --revision=2
 kubectl rollout undo deployment <deploy_name> --to-revision=1
 
 # create a pod with nginx image and export port 80
-kubectl run pod1 --image=nginx:2.3.5 --port=80  --dry-run=client -o yaml
+kubectl run pod1 --image=nginx:2.3.5 --port=80  --labels project=pl6-gcc-api --dry-run=client -o yaml
+
 
 # run a temporary pod
 kubectl run busybox --image=busybox --rm -it -- /bin/sh
@@ -55,9 +56,11 @@ kubectl get scaledobject -A
 # create a generic secret with literal value
 kubectl create secret generic my-secret --from-literal=db-password=speed --from-literal=password=mach5
 # create secret from file
-kubectl creare secret generic my-secret --from-file=config
+kubectl create secret generic my-secret --from-file=config.txt
 # create configmap
 kubectl create configmap ext-service-map --from-literal=api_endpoint=https://myapp/api --from-literal=username=traxy
+kubectl -n moon create configmap configmap-web-moon-html --from-file=index.html=/opt/course/15/web-moon.html
+
 
 # deploy container to k8s pod
 kubectl create deployment <deployment_name> --image=<container> -n <namespace>
