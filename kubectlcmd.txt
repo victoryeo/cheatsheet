@@ -53,6 +53,10 @@ kubectl get scaledobject -A
 
 # create a generic secret with literal value
 kubectl create secret generic my-secret --from-literal=db-password=speed --from-literal=password=mach5
+# create secret from file
+kubectl creare secret generic my-secret --from-file=config
+# create configmap
+kubectl create configmap ext-service-map --from-literal=api_endpoint=https://myapp/api --from-literal=username=traxy
 
 # deploy container to k8s pod
 kubectl create deployment <deployment_name> --image=<container> -n <namespace>
@@ -62,7 +66,7 @@ kubectl create deployment nginxapp --image=nginx:1.14.2
 # deploy and expose port
 kubectl create deploy myapp --image=nginx --port=80 --replicas=1 
 # create quota
-kubectl create quota my-quota --hard=cpu=1,memory=500M,pods=2 --dry-run=client -o yaml -n rq-demo 
+kubectl create quota my-quota --hard=cpu=1,memory=500M,pods=2,secrets=1 --dry-run=client -o yaml -n rq-demo 
 # create service
 kubectl create service clusterip myapp --tcp=80:80
 
