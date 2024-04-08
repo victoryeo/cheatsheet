@@ -79,6 +79,10 @@ kubectl create deploy myapp --image=nginx --port=80 --replicas=1
 kubectl create quota my-quota --hard=cpu=1,memory=500M,pods=2,secrets=1 --dry-run=client -o yaml -n rq-demo 
 # create service
 kubectl create service clusterip myapp --tcp=80:80
+# also create a service
+(Using expose instead of "kubectl create service clusterip"
+is faster because it already sets the correct selector-labels.)
+k -n mercury expose deployment sunny --name sun-srv --port 9999 --target-port 80
 
 # describe deployment
 kubectl describe deployment <deployment_name> -n <namespace>
