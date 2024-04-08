@@ -20,6 +20,8 @@ kubectl rollout undo deployment <deploy_name> --to-revision=1
 # create a pod with nginx image and export port 80
 kubectl run pod1 --image=nginx:2.3.5 --port=80  --labels project=pl6-gcc-api --dry-run=client -o yaml
 
+# run temp pod with specific labels
+kubectl run tmppod --image=busybox --restart=Never --rm -i --labels="app=todo,tier=backend" -- wget -O- 10.156.8.26:3306
 
 # run an iterative pod
 kubectl run busybox --image=busybox --rm -it -- /bin/sh
