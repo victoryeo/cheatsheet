@@ -25,6 +25,7 @@ kubectl run pod1 --image=nginx:2.3.5 --port=80  --labels project=pl6-gcc-api --d
 kubectl run busybox --image=busybox --rm -it -- /bin/sh
 # run a temp pod and wget against clusterIP address of the service
 kubectl run tmppod --image=busybox --restart=Never -it --rm -- wget -O- 10.66.220.246
+kubectl run tmppod -i --rm --image=nginx:alpine --restart=Never  -- curl http://<svc_name>.<namespace>:3333
 
 # find pod with selector value of example
 kubectl get pod -l app=example
