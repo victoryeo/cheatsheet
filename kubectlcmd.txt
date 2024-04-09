@@ -11,11 +11,14 @@ kubectl get cronjobs <job_name> -o yaml
 # update nginx image to latest version
 kubectl set image deployment/<deploy_name> nginx=nginx:latest
 
-# verift rollout history
+# verify rollout history
 kubectl rollout history deploy <deploy_name> --revision=2
 
 # revert the deployment to revision 1
 kubectl rollout undo deployment <deploy_name> --to-revision=1
+
+# rollout restart
+kubectl -n moon rollout restart deploy <deployname>
 
 # create a pod with nginx image and export port 80
 kubectl run pod1 --image=nginx:2.3.5 --port=80  --labels project=pl6-gcc-api --dry-run=client -o yaml
@@ -85,6 +88,8 @@ kubectl create service clusterip myapp --tcp=80:80
 (Using expose instead of "kubectl create service clusterip"
 is faster because it already sets the correct selector-labels.)
 k -n <namespace> expose deployment sunny --name sun-srv --port 9999 --target-port 80
+# expose a pod
+k -n <namespace> expose pod <podname> --name <svc_name> --port 3333 --target-port 80
 
 # describe deployment
 kubectl describe deployment <deployment_name> -n <namespace>
