@@ -39,3 +39,6 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 
 # list repo
 helm repo ls
+
+# update repo
+helm repo update
