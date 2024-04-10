@@ -6,9 +6,15 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      id: frontent # label of the pods this policy will be applied on
+      id: frontend # label of the pods this policy will be applied on
   policyTypes:
-  - Egress # we only want to control egress
+  - Egress #  control egress
+  - Ingress
+  ingress:
+  - from: # 1st ingress rule
+    - podSelector: # allow ingress only from pods with api label
+        matchLabels: 
+          id: api
   egress:
   - to: # 1st egress rule
     - podSelector: # allow egress only to pods with api label
