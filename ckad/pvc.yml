@@ -1,32 +1,11 @@
-apiVersion: apps/v1
-kind: Deployment
+kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  creationTimestamp: null
-  labels:
-    app: sunny
-  name: sunny
-  namespace: mercury
+  name: myclaim-pvc
+  namespace: earth
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: sunny-pod
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: sunny-pod
-    spec:
-      volumes:
-      - name: mypd
-        persistentVolumeClaim:
-          claimName: myclaim-pvc
-      containers:
-      - image: nginx:1.17.3-alpine
-        name: nginx
-        resources: {}
-        volumeMounts:
-        - mountPath: "/var/www/html"
-          name: mypd
-status: {}
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

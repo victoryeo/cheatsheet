@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-backend
+  name: my-backend
+spec:
+  securityContext:
+    fsGroup: 3000
+  volumes:
+  - name: sec-ctx-vol
+    emptyDir: {} 
+  - name: host-vol
+    hostPath:
+      path: /data/demo       
+  containers:
+  - image: nginx
+    name: my-backend
+    volumeMounts:
+    - name: sec-ctx-vol
+      mountPath: /data/demo
+    resources: {}
+    securityContext:
+      runAsNonRoot: false
+      allowPrivilegeEscalation: false
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
