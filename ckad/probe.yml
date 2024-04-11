@@ -11,12 +11,13 @@ spec:
       app: project-23-api
   template:
     metadata:
+      name: busybox-pod
       labels:
         app: project-23-api
     spec:
       containers:
       - image: busybox:1.31.0
-        name: busybox
+        name: busybox-container
         command:
         - sh
         - -c
