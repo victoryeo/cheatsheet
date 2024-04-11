@@ -13,7 +13,7 @@ spec:
     emptyDir: {} 
   - name: host-vol
     hostPath:
-      path: /data/demo       
+      path: /data/demo
   containers:
   - image: nginx
     name: my-backend
