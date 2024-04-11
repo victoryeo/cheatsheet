@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-backend
+  name: my-volume
+spec:
+  serviceAccount: sa-sun-deploy
+  serviceAccountName: my-team
+  volumes:
+  - name: sec-ctx-vol
+    emptyDir: {} 
+  - name: host-vol
+    hostPath:
+      path: /data/demo
+  - name: secret-volume
+    secret:
+      secretName: special-secret
+  - name: config-volume
+    configMap:
+      name: special-config        
+  containers:
+  - image: nginx
+    name: my-backend
+    volumeMounts:
+    - name: sec-ctx-vol
+      mountPath: /data/demo1
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
