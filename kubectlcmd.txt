@@ -68,7 +68,9 @@ kubectl get events --sort-by=.metadata.creationTimestamp -n <namespace>
 kubectl get scaledobject -A
 
 # create a job
-k create job neb-new-job --image=busybox:1.31.0
+kubectl create job neb-new-job --image=busybox:1.31.0
+# create cronjob
+kubectl create cronjob my-job --image=busybox --schedule="*/1 * * * *" -- date
 # create a generic secret with literal value
 kubectl create secret generic my-secret --from-literal=db-password=speed --from-literal=password=mach5
 # create secret from file
