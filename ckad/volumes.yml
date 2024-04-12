@@ -6,7 +6,6 @@ metadata:
     run: my-backend
   name: my-volume
 spec:
-  serviceAccount: sa-sun-deploy
   serviceAccountName: my-team
   volumes:
   - name: sec-ctx-vol
