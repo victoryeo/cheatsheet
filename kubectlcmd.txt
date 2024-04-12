@@ -94,9 +94,9 @@ kubectl create service clusterip myapp --tcp=80:80
 # also create a service
 (Using expose instead of "kubectl create service clusterip"
 is faster because it already sets the correct selector-labels.)
-k -n <namespace> expose deployment sunny --name sun-srv --port 9999 --target-port 80
+kubectl -n <namespace> expose deployment sunny --name sun-srv --port 9999 --target-port 80
 # expose a pod
-k -n <namespace> expose pod <podname> --name <svc_name> --port 3333 --target-port 80
+kubectl -n <namespace> expose pod <podname> --name <svc_name> --port 3333 --target-port 80
 
 # describe deployment
 kubectl describe deployment <deployment_name> -n <namespace>
@@ -115,11 +115,13 @@ kubectl describe ing <ingress_name> -n <namespace>
 kubectl apply -f <k8s_yaml>.yml
 
 # see logs
-kubectl get pods -n gitlab-managed-apps
 kubectl logs install-helm -n gitlab-managed-apps
 
 # access log of previously crashed pod
 kubectl logs --tail=10 <POD-NAME> -p
+
+# see log of jobs
+k logs jobs/<jobname>
 
 # create a pod
 kubectl create -f ./config-example.yaml -n <namespace>
