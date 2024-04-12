@@ -26,6 +26,9 @@ kubectl run pod1 --image=nginx:2.3.5 --port=80  --labels project=pl6-gcc-api --d
 # run temp pod with specific labels
 kubectl run tmppod --image=busybox --restart=Never --rm -i --labels="app=todo,tier=backend" -- wget -O- 10.156.8.26:3306
 
+# run pod with command
+kubectl run pod6 --image=busybox:1.31.0 --dry-run=client -o yaml  --command -- sh -c "touch /tmp/ready && sleep 1d" > 6.yaml
+
 # run an iterative pod
 kubectl run busybox --image=busybox --rm -it -- /bin/sh
 # run a temp pod and wget against clusterIP address of the service
