@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: my-job
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: my-job
+      labels:
+        app: joblabel
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app: podlabel
+        spec:
+          containers:
+          - command:
+            - date
+            image: busybox
+            name: my-job
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: '*/1 * * * *'
+status: {}
