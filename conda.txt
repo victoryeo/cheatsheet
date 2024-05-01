@@ -32,7 +32,7 @@ conda install -c anaconda pandas-datareader
 
 # install django
 conda install -c anaconda django
-condo install -c conda-forge djangorestframework
+conda install -c conda-forge djangorestframework
 
 # add python2 to the virtual environment
 conda create -n mypython python=2.7
