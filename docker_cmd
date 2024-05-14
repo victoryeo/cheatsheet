@@ -2,6 +2,10 @@
 # docker context
 docker context ls
 
+docker pull victoryeo00/installer:tag
+# after docker pull, run docker save
+docker save victoryeo00/installer:tag > victoryeo00_installer.tar
+
 # build and tag the docker image
 docker build -t <tag_name> .
 # build with specific dockerfilename
