@@ -13,6 +13,9 @@ find ./ -type f -exec sed -i -e 's/old/new/g' {} \;
 # change file extension recursively
 find ./ -depth -name "*.js" -exec sh -c 'mv "$1" "${1%.js}.ts"' _ {} \;
 
+# auto reply yes to curl command
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+
 # curl commands
 curl -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/users/register -d '{"username":"xyz","password":"xyz"}'
 curl -X GET http://127.0.0.1:5000/api/orders
