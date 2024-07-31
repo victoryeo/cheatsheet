@@ -1,3 +1,6 @@
+# get and decode secret
+kubectl -n <ns> get secrets/api --template={{.data.POSTGRESQL_PASSWORD}} | base64 -d
+
 # kubectl command auto completion 
 source <(kubectl completion bash)
 complete -F __start_kubectl k
