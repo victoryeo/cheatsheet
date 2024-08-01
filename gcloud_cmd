@@ -16,6 +16,9 @@ gcloud auth activate-service-account  <account email> --key-file=<keyfile>.json
 # list the APIs
 gcloud services list
 
+# find gcp username
+gcloud compute os-login describe-profile
+
 # to overcome: "Error: Could not load the default credentials"
 gcloud auth application-default login
 # show current project
