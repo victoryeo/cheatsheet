@@ -33,3 +33,6 @@ gcloud  compute addresses delete aerotrade-private-ip-address --global
 gcloud config set compute/zone NAME
 # show the node pools
 gcloud container node-pools list --cluster=<cluster_name> --zone=<zone>
+
+# ssh to GCE on command line
+gcloud compute ssh --zone "zone" "gce_name" --project "proj_name"
