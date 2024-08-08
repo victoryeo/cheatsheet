@@ -160,6 +160,7 @@ kubectl config unset contexts.aws_cluster1-kubernetes
 
 kubectl config unset clusters.foobar-baz
 
+kubectl config get-clusters
 
 # to connect to a pod command line
 kubectl exec nginx-f89759699-2gbwc  -it -- bash
