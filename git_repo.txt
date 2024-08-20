@@ -1,3 +1,8 @@
+# git
+git log --pretty=oneline
+git tag -a v1.0 <commit_hash>
+git push origin tag v1.0
+
 # add git remote with access token
 git remote add origin https://<username>:<access_token>@github.com/<repo_name>.git
 
