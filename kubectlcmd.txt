@@ -202,6 +202,9 @@ kubectl describe -n kube-system configmap/aws-auth
 # to untaint nodes
 kubectl taint nodes --all eks.amazonaws.com/compute-type=fargate:NoSchedule-
 
+# to see node info
+kubectl get nodes <node> -o json
+
 # to check CSI driver version
 kubectl explain CSIDriver
 
