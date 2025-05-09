@@ -1,3 +1,6 @@
+# find connection to  service is good or bad from a pod's perspective
+kubectl exec -n prod my-pod -it -- sh -c 'timeout 1 bash -c "</dev/tcp/your-service/80" && echo "good" || echo "bad"'
+
 # get and decode secret
 kubectl -n <ns> get secrets/api --template={{.data.POSTGRESQL_PASSWORD}} | base64 -d
 

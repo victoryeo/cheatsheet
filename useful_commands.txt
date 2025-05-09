@@ -1,3 +1,6 @@
+# find connection is good or bad
+timeout 1 bash -c "</dev/tcp/www.mit.edu/80" && echo "good" || echo "bad
+
 # search a string , exclude multiple directories
 grep -r __typename --exclude-dir={.next,node_modules} > log
 # print prev and next 5 lines of the matched string IP
