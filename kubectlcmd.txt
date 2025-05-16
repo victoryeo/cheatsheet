@@ -1,3 +1,6 @@
+# test full domain name of a service
+kubectl run test-dns-busybox -it --image=busybox:1.28 --rm --restart=Never -- nslookup myservice.mynamespace.svc.cluster.local
+
 # find connection to  service is good or bad from a pod's perspective
 kubectl exec -n prod my-pod -it -- sh -c 'timeout 1 bash -c "</dev/tcp/your-service/80" && echo "good" || echo "bad"'
 
