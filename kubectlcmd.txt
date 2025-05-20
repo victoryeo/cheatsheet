@@ -1,3 +1,6 @@
+# delete all the Pending pods
+kubectl -n prod get pods | grep Pending | awk '{print $1}' | xargs kubectl -n prod delete pod -o name
+
 # test full domain name of a service
 kubectl run test-dns-busybox -it --image=busybox:1.28 --rm --restart=Never -- nslookup myservice.mynamespace.svc.cluster.local
 
