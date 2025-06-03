@@ -84,9 +84,11 @@ kubectl create job neb-new-job --image=busybox:1.31.0
 # create cronjob
 kubectl create cronjob my-job --image=busybox --schedule="*/1 * * * *" -- date
 # create a generic secret with literal value
-kubectl create secret generic my-secret --from-literal=db-password=speed --from-literal=password=mach5
+kubectl create secret generic my-secret1 --from-literal=db-password=speed --from-literal=password=mach5
 # create secret from file
-kubectl create secret generic my-secret --from-file=config.txt
+kubectl create secret generic my-secret2 --from-file=config.txt
+# create secre from file with a name
+kubectl create secret generic my-secret3 --from-file=service_account.json=/path/to/service_account_credential
 # create configmap
 kubectl create configmap ext-service-map --from-literal=api_endpoint=https://myapp/api --from-literal=username=traxy
 kubectl -n <namespace> create configmap configmap-web-moon-html --from-file=index.html=/opt/course/15/web-moon.html
