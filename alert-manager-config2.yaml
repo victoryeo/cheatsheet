@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: main-alertmanager-config
+  namespace: kube-prometheus-stack
+  labels: # Add this label section
+    alertmanagerConfig: main-alertmanager-config
+spec:
+  route:
+    groupBy: ['alertname', 'cluster', 'service']
+    groupWait: 10s
+    groupInterval: 10s
+    repeatInterval: 1h
+    receiver: 'default-receiver'
+    routes:
+    - matchers:
+      - name: alertname
+        value: Watchdog
+        matchType: "="
+      receiver: 'null'
+    - matchers:
+      - name: severity
+        value: critical
+        matchType: "="
+      receiver: 'critical-alerts'
+      groupWait: 10s
+      repeatInterval: 10m
+    - matchers:
+      - name: severity
+        value: warning
+        matchType: "="
+      receiver: 'null'
+    - matchers:
+      - name: severity
+        value: info
+        matchType: "="
+      receiver: 'null'      
+  receivers:
+  - name: 'default-receiver'
+    emailConfigs:
+    - to: 'alerts@company.com'
+      from: 'alertmanager@company.com'
+      smarthost: 'smtp1.company.com:587'
+  - name: 'critical-alerts'
+    emailConfigs:
+    - to: 'admin@company.com'
+      from: 'alertmanager@company.com'
+      smarthost: 'smtp2.company.com:587'
+  - name: 'null'

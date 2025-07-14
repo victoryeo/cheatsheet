@@ -1,0 +1,73 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: new-k8s-apps-rules # A descriptive name for this set of rules
+  namespace: kube-prometheus-stack # The namespace where Prometheus Operator is watching for rules
+  labels: # <--- ADD THESE LABELS
+    release: kube-prometheus-stack
+    app.kubernetes.io/instance: kube-prometheus-stack # Optional, but good practice for consistency
+    app.kubernetes.io/part-of: kube-prometheus-stack # Optional
+spec:
+  groups:
+    - name: new-k8s-apps # Name for this group of rules
+      rules:
+        # Alerting Rule: Pod Evicted
+        - alert: KubePodEvicted
+          expr: |
+            sum by (namespace, pod) (
+              kube_pod_status_phase{phase="Evicted"} == 1
+            ) > 0
+          for: 1m # Alert fires if an Evicted pod exists for 1 minute
+
+          labels:
+            severity: critical
+            component: pod-management
+            team: platform
+
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is Evicted" # <--- Updated summary
+            description: "Pod '{{ $labels.namespace }}/{{ $labels.pod }}' has been Evicted. This indicates a resource constraint or a policy violation." # <--- Updated description
+            runbook: "https://your-company.com/runbooks/kubernetes-pod-evicted" # Update your runbook link
+
+        # Alerting Rule: Pod in CrashLoopBackOff
+        - alert: KubePodCrashLooping
+          expr: |
+            sum by (namespace, pod) (
+              kube_pod_container_status_restarts_total
+              unless
+              kube_pod_container_status_running == 1
+            ) > 0
+          for: 1m # Alert fires if condition is true for 5 minutes
+
+          labels:
+            severity: critical # Used for routing in Alertmanager
+            component: app-stability
+            team: platform
+
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is crash looping"
+            description: "Container '{{ $labels.container }}' in pod '{{ $labels.pod }}' is repeatedly restarting (more than 0 restarts and not running)."
+            runbook: "https://your-company.com/runbooks/kubernetes-pod-crashlooping" # Link to your internal runbook
+
+        # Recording Rule: Count of pods not ready
+        - record: namespace_pods_not_ready_total
+          expr: sum by (namespace) (kube_pod_status_ready == 0)
+          labels:
+            group: pod-readiness
+
+        # Alerting Rule: High CPU Usage for a Pod
+        - alert: PodHighCpuUsage
+          expr: |
+            sum(rate(container_cpu_usage_seconds_total{namespace="{{ $labels.namespace }}", pod="{{ $labels.pod }}"}[5m])) by (namespace, pod)
+            /
+            sum(kube_pod_container_resource_limits_cpu_cores{namespace="{{ $labels.namespace }}", pod="{{ $labels.pod }}"}) by (namespace, pod)
+            * 100 > 90 # Over 90% CPU usage based on limits
+          for: 10m
+
+          labels:
+            severity: warning
+            team: application-devs
+
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} CPU usage is high"
+            description: "CPU usage for pod {{ $labels.namespace }}/{{ $labels.pod }} has been above 90% of its limit for 10 minutes."
