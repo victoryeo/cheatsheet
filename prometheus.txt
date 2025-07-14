@@ -25,8 +25,8 @@ kubectl create secret generic bjak-alertmanager-secret   --from-file=alertmanage
 # check secret base64 value
 kubectl get secret bjak-alertmanager-secret -n kube-prometheus-stack -o jsonpath='{.data.alertmanager\.yml}' | tr -d '\n'
 
-# check alert manager
-kubectl get alertmanagers.monitoring.coreos.com -o yaml
+# check alert manager yaml
+kubectl get alertmanagers.monitoring.coreos.com kube-prometheus-stack-alertmanager -n kube-prometheus-stack -o yaml
 
 helm install kube-prometheus-stack \
   --create-namespace \
