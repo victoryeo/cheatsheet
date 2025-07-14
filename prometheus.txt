@@ -1,0 +1,53 @@
+# check prometheus rules 
+kubectl exec -it -n kube-prometheus-stack prometheus-kube-prometheus-stack-prometheus-0 -- ls /etc/prometheus/rules/prometheus-kube-prometheus-stack-prometheus-rulefiles-0
+
+# check default alert manager gzipped config 
+kubectl exec -it -n kube-prometheus-stack alertmanager-kube-prometheus-stack-alertmanager-0 -- gunzip -c /etc/alertmanager/config/alertmanager.yaml.gz
+
+# check alert manager config
+kubectl exec -it -n kube-prometheus-stack alertmanager-kube-prometheus-stack-alertmanager-0 -- cat /etc/alertmanager/config_out/alertmanager.env.yaml
+
+# access prometheus UI
+kubectl --namespace kube-prometheus-stack port-forward svc/kube-prometheus-stack-prometheus 9090
+
+# access alert manager UI
+kubectl --namespace kube-prometheus-stack port-forward svc/kube-prometheus-stack-alertmanager 9093
+
+# check alert manager logs
+kubectl -n kube-prometheus-stack logs alertmanager-kube-prometheus-stack-alertmanager-0
+
+# check any alerts are firing
+kubectl exec -it -n kube-prometheus-stack alertmanager-kube-prometheus-stack-alertmanager-0 -- amtool alert query --alertmanager.url=http://localhost:9093
+
+# generate secret
+kubectl create secret generic bjak-alertmanager-secret   --from-file=alertmanager.yml=./prometheus-alert-email.yaml   --dry-run=client -o yaml | kubectl apply -f - -n kube-prometheus-stack
+
+# check secret base64 value
+kubectl get secret bjak-alertmanager-secret -n kube-prometheus-stack -o jsonpath='{.data.alertmanager\.yml}' | tr -d '\n'
+
+# check alert manager
+kubectl get alertmanagers.monitoring.coreos.com -o yaml
+
+helm install kube-prometheus-stack \
+  --create-namespace \
+  --namespace kube-prometheus-stack \
+  prometheus-community/kube-prometheus-stack
+
+helm show values prometheus-community/kube-prometheus-stack
+
+# below cmd is not useful
+helm upgrade kube-prometheus-stack  prometheus-community/kube-prometheus-stack -f values.yaml -n kube-prometheus-stack
+
+# show prometheus operator log, important for debugging alertmanagerconfig
+kubectl logs -n kube-prometheus-stack -l app.kubernetes.io/name=kube-prometheus-stack-prometheus-operator
+
+# patch to remove auto namespace match in alert manager
+kubectl patch alertmanager kube-prometheus-stack-alertmanager -n kube-prometheus-stack --type='merge' -p='{"spec":{"alertmanagerConfigMatcherStrategy":{"type":"None"}}}'
+
+
+
+
+
+
+
+
