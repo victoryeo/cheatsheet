@@ -42,8 +42,15 @@ spec:
       from: 'alertmanager@company.com'
       smarthost: 'smtp1.company.com:587'
   - name: 'critical-alerts'
-    emailConfigs:
-    - to: 'admin@company.com'
-      from: 'alertmanager@company.com'
-      smarthost: 'smtp2.company.com:587'
+    webhookConfigs:
+      - url: 'https://localhost:8080/send-email'
+      sendResolved: true
+      httpConfig:
+        basicAuth:
+          username:
+            name: webhook-auth
+            key: username
+          password:
+            name: webhook-auth
+            key: password
   - name: 'null'
