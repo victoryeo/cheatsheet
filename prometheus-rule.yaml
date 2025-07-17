@@ -48,6 +48,11 @@ spec:
             summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is crash looping"
             description: "Container '{{ $labels.container }}' in pod '{{ $labels.pod }}' is repeatedly restarting (more than 0 restarts and not running)."
             runbook: "https://your-company.com/runbooks/kubernetes-pod-crashlooping" # Link to your internal runbook
+            # --- Add email-specific annotations here ---
+            email_subject: "CRITICAL ALERT:"
+            email_from: "your@gmail.com"
+            email_to: "your@gmail.com" # Comma-separated for multiple recipients
+            # ------------------------------------------
 
         # Recording Rule: Count of pods not ready
         - record: namespace_pods_not_ready_total
