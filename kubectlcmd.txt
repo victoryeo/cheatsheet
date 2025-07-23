@@ -1,3 +1,14 @@
+# find which pod is using node CPU core
+kubectl get pods -A -o custom-columns=NAME:.metadata.name,NAMESPACE:.metadata.namespace --field-selector spec.nodeName=gke-node-name --no-headers | xargs -L1 bash -c 'pod_name=$(echo $0 | awk "{print \$1}"); namespace=$(echo $0 | awk "{print \$2}"); kubectl top pod $pod_name -n namespace-name'
+
+# find which pod is running on a node
+kubectl get pods -A -o wide --field-selector spec.nodeName=gke-your-cluster-default-node
+
+# port forward a service for testing locally
+kubectl port-forward -n dev svc/bjak-backend-service 8080:80
+# then, you use curl to call the api endpoint
+curl http://localhost:8080/the-api-endpoint-to-test
+
 # delete all the Pending pods
 kubectl -n prod get pods | grep Pending | awk '{print $1}' | xargs kubectl -n prod delete pod -o name
 
