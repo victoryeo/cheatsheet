@@ -1,7 +1,7 @@
-# check security context constrants (scc)
+# check security context constraints (scc)
 oc describe project <namespace>  | grep scc
 
-# edit the uid gid of security context constrants
+# edit the uid gid of security context constraints
 oc edit namespace <namespace>
 
 # get restricted scc in yaml format
