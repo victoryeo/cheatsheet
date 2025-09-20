@@ -1,0 +1,27 @@
+cargo build-sbf --version
+
+agave-install list
+
+rustup toolchain list
+
+rustup show
+
+avm list
+
+ln -sf ~/.avm/bin/anchor-0.25.0 ~/.avm/bin/anchor
+
+# set Anchor Version Manager path
+export PATH="$HOME/.avm/bin:$PATH"
+
+# solana cli installed folder
+export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+
+# install solana cli
+sh -c "$(curl -sSfL https://release.anza.xyz/v1.17.25/install)"
+
+# get solana config
+solana config get
+
+solana config set --url https://api.devnet.solana.com
+
+solana airdrop 3
