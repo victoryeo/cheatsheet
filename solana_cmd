@@ -2,6 +2,8 @@ cargo build-sbf --version
 
 agave-install list
 
+agave-install  init 2.0.3
+
 rustup toolchain list
 
 rustup show
