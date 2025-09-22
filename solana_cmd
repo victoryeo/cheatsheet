@@ -27,3 +27,8 @@ solana config get
 solana config set --url https://api.devnet.solana.com
 
 solana airdrop 3
+
+# if anchor build failed - can't find crate for `core`, `std`
+# Check ~/.cache/solana/ directory
+# Remove the currently used platform tools there: rm -rf ~/.cache/solana/v1.48
+# Run: cargo build-sbf
